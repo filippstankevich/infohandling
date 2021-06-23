@@ -10,18 +10,18 @@ import com.epam.infohandling.parsing.Parser;
 
 public class TextProcessor {
 
-	public Composite parseText(String text) throws IOException {		
+	public Composite parseText(String text) throws IOException {		//изменить на Component
 		Parser parser = new ChainBuilder().build();
-		String textRromFile = readFile(text);
+		String textRromFile = readResource(text);
 		return parser.parse(textRromFile.trim());
 	}
 
-	private String readFile(String text) throws IOException {
+	private String readResource(String text) throws IOException {
 		InputStream in = this.getClass().getResourceAsStream("/" + text);
 
 		try(BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(in))) 
 		{
-			try {
+			//try {
 				StringBuilder sb = new StringBuilder();
 				String line = bufferedReader.readLine();
 
@@ -32,9 +32,9 @@ public class TextProcessor {
 				}
 				String everything = sb.toString();
 				return everything;
-			} finally {
+			/*/} finally {
 				bufferedReader.close();
-			}
+			}*/
 		}
 	}
 }

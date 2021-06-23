@@ -5,42 +5,53 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class ExpressionCalculator {
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-	private List<Expression> parse(String expression) {
+public class ExpressionCalculator {
+	private static Logger logger = LogManager.getLogger();
+
+
+	public List<Expression> parse(String expression, Map<String, Double> variables) {
+		expression = expression.replace("[", "");
+		expression = expression.replace("]", "");
 		List<Expression> expressions = new ArrayList<>();
 		for (String lexeme : expression.split("\\s")) {
-			if (lexeme.isEmpty() || (lexeme.equals("[") || lexeme.equals("]"))) {
+			if (lexeme.isEmpty()) {
 				continue;
 			}
-			char temp = lexeme.charAt(0);
-			switch (temp) {
-			case '+':
+			//char temp = lexeme.charAt(0);
+			switch (lexeme) {
+			case "+":
 				expressions.add(new TerminalPlusExpression());
 				break;
-			case '-':
+			case "-":
 				expressions.add(new TerminalMinusExpression());
 				break;
-			case '*':
+			case "*":
 				expressions.add(new TerminalMultiplyExpression());
 				break;
-			case '/':
+			case "/":
 				expressions.add(new TerminalDivideExpression());
 				break;
 			default:
-				Scanner scan = new Scanner(lexeme);
-				if (scan.hasNextInt()) {
-					expressions.add(
-							new NonterminalExpression(scan.nextInt()));
+				if (variables.containsKey(lexeme)) {
+					expressions.add(new NonterminalExpression(variables.get(lexeme)));
+				} else {
+					Scanner scan = new Scanner(lexeme);
+					if (scan.hasNextInt()) {
+						expressions.add(
+								new NonterminalExpression(scan.nextInt()));
+					}
 				}
 			}
 		}
 		return expressions;
 	}
-	
-	public int calculate(String expression, Map<String, Double> variables) {
+
+	public Double calculate(String expression, Map<String, Double> variables) {
 		Context contex = new Context();
-		List<Expression> expressions = parse(expression);
+		List<Expression> expressions = parse(expression, variables);
 		for(Expression terminal : expressions) {
 			terminal.interpret(contex);
 		}

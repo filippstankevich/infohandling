@@ -12,7 +12,7 @@ public class Composite implements Component {
 		this.name = name;
 		this.value = value;
 	}
-	
+
 	@Override
 	public void operation() {
 		//System.out.println("Composite -> Call children operations");

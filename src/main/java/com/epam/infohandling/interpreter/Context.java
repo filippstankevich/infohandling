@@ -5,13 +5,13 @@ import java.util.Deque;
 
 public class Context {
 	
-	private Deque<Integer> contexValue = new ArrayDeque<>();
+	private Deque<Double> contexValue = new ArrayDeque<>();
 	
-	public Integer popValue() {
+	public Double popValue() {
 		return contexValue.pop();
 	}
 	
-	public void pushValue(Integer value) {
+	public void pushValue(Double value) {
 		this.contexValue.push(value);
 	}
 	

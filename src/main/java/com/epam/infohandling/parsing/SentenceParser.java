@@ -10,7 +10,7 @@ import com.epam.infohandling.model.Leaf;
 public class SentenceParser extends AbstractParser {
 	
 	private static final String SPLITTER = "\\s";
-	private static final String  MATH_SPLITTER = "\\[([a-z|0-9|+|\\-|*/|–|\\s]+)\\]";
+	public static final String  MATH_SPLITTER = "\\[([a-z|0-9|+|\\-|*/|–|\\s]+)\\]";
 			
 	public SentenceParser(Parser successor) {
 		super(null);
