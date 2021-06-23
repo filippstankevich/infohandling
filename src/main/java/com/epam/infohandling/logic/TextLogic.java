@@ -76,21 +76,23 @@ public class TextLogic {
    
 
     public String restore(Composite tree) {
-    	StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < tree.childrenCount(); i++) {
-			Composite child = (Composite)tree.getChild(i);
-			sb.append("\t");
-			for(int j = 0; j < child.childrenCount(); j++) {
-				Composite childLevel2 =  (Composite)child.getChild(j);
-				for(int z = 0; z < childLevel2.childrenCount(); z++) {
-					Leaf childLevel3 =  (Leaf)childLevel2.getChild(z);
-					sb.append(childLevel3.getValue()).append(" ");
-				}
-				sb.append("\n");
-			}
-		}
-		return sb.toString();
-        
+    	StringBuilder sbForRestoringText = new StringBuilder();
+    	restoringTextFromTree(tree, sbForRestoringText);
+    	System.out.println(sbForRestoringText.toString());
+		return sbForRestoringText.toString();
+    }
+    
+    private void restoringTextFromTree(Composite tree, StringBuilder sb) {
+        for (int i = 0; i < tree.childrenCount(); i++) {
+        	Component child = (Component)tree.getChild(i);
+        	if (child.isLeaf()) {
+        		sb.append((String)child.getValue()).append(" ");
+        	} else {
+        		sb.append("\t");
+        		restoringTextFromTree((Composite) tree.getChild(i), sb);
+        		sb.append("\n");
+        	}
+        }
     }
     
     public Composite reverse(Composite text) {
