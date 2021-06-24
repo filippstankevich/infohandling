@@ -2,20 +2,22 @@ package com.epam.infohandling.parsing;
 
 import com.epam.infohandling.model.Component;
 import com.epam.infohandling.model.Composite;
+import com.epam.infohandling.model.Leaf;
 
-public class ParagraphParser extends AbstractParser {
+public class WordParser extends AbstractParser {
 
-    private String splitter = "\n\n";
-    public ParagraphParser(Parser successor) {
+    private String splitter = " ";
+
+    public WordParser(Parser successor) {
         super(successor);
     }
 
     @Override
     public Component parse(String text) {
-        Composite composite = new Composite();
+        Component composite = new Composite();
         String[] strings = text.split(splitter);
         for (String s: strings) {
-            Component inner = getSuccessor().parse(s);
+            Component inner = new Leaf(s);
             composite.add(inner);
         }
         return  composite;
