@@ -1,7 +1,7 @@
 package com.epam.infohandling.parsing;
 
-import com.epam.infohandling.model.Component;
+import com.epam.infohandling.model.Composite;
 
 public interface Parser {
-    Component parse(String text);
+    Composite parse(String text);
 }

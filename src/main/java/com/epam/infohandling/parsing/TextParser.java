@@ -11,11 +11,12 @@ public class TextParser extends AbstractParser {
         super(successor);
     }
     @Override
-    public Component parse(String text) {
+    public Composite parse(String text) {
         Composite composite = new Composite();
+        composite.setDelimiter(splitter);
         String[] strings = text.split(splitter);
         for (String s: strings) {
-            Component inner = getSuccessor().parse(s);
+            Component inner = getSuccessor().parse(s.trim());
             composite.add(inner);
         }
         return  composite;

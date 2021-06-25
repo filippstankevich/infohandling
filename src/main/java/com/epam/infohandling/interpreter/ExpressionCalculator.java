@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ExpressionCalculator {
 
-    public int calculate(String expression, Map<String, Double> variables) {
+    public int calculate(String expression) {
         Context context = new Context();
         List<Expression> expressions = parse(expression);
         for (Expression terminal: expressions) {
@@ -32,10 +32,13 @@ public class ExpressionCalculator {
                     break;
                 case '-':
                     expressions.add(new TerminalMinusExpression());
+                    break;
                 case '*':
                     expressions.add(new TerminalMultiplyExpression());
+                    break;
                 case '/':
                     expressions.add(new TerminalDivideExpression());
+                    break;
                 default:
                     Scanner scan = new Scanner(lexeme);
                     if (scan.hasNextInt()){

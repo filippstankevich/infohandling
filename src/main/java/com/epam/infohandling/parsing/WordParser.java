@@ -13,11 +13,12 @@ public class WordParser extends AbstractParser {
     }
 
     @Override
-    public Component parse(String text) {
-        Component composite = new Composite();
+    public Composite parse(String text) {
+        Composite composite = new Composite();
+        composite.setDelimiter(splitter);
         String[] strings = text.split(splitter);
         for (String s: strings) {
-            Component inner = new Leaf(s);
+            Component inner = new Leaf(s.trim());
             composite.add(inner);
         }
         return  composite;
