@@ -2,11 +2,13 @@ package com.epam.infohandling.parsing;
 
 import com.epam.infohandling.model.Component;
 import com.epam.infohandling.model.Composite;
+import com.epam.infohandling.model.Leaf;
 
-public class ParagraphParser extends AbstractParser {
+public class WordParser extends AbstractParser {
 
-    private String splitter = "\n\n";
-    public ParagraphParser(Parser successor) {
+    private String splitter = " ";
+
+    public WordParser(Parser successor) {
         super(successor);
     }
 
@@ -16,7 +18,7 @@ public class ParagraphParser extends AbstractParser {
         composite.setDelimiter(splitter);
         String[] strings = text.split(splitter);
         for (String s: strings) {
-            Component inner = getSuccessor().parse(s.trim());
+            Component inner = new Leaf(s.trim());
             composite.add(inner);
         }
         return  composite;
