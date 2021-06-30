@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 public class ExpressionCalculator {
 	private static Logger logger = LogManager.getLogger();
-
 
 	public List<Expression> parse(String expression, Map<String, Double> variables) {
 		expression = expression.replace("[", "");
@@ -20,7 +18,6 @@ public class ExpressionCalculator {
 			if (lexeme.isEmpty()) {
 				continue;
 			}
-			//char temp = lexeme.charAt(0);
 			switch (lexeme) {
 			case "+":
 				expressions.add(new TerminalPlusExpression());

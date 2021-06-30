@@ -1,35 +1,36 @@
 package com.epam.infohandling.parsing;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import com.epam.infohandling.model.Component;
 import com.epam.infohandling.model.Composite;
 
 public class ParagraphParser extends AbstractParser {
+	private static Logger logger = LogManager.getLogger();
+
+	private static final String SPLITTER = "\\.";
+	private static final String dot = ".";
+	private static final String paragraph = "Paragraph";
 
 	public ParagraphParser(Parser successor) {
 		super(successor);
+		logger.info("# paragraphParser was created #");
 	}
-	
+
 	@Override
-	public Composite parse(String paragraphValue) {
+	public Component parse(String paragraphValue) {
 		paragraphValue = paragraphValue.trim();
 
-		int endOfSenstnce = paragraphValue.indexOf(".", 0);
-		int lastIndex = 0;
-		List<String> sentences = new ArrayList<String>();
-		while (endOfSenstnce > 0) {
-			String sentence = paragraphValue.substring(lastIndex, endOfSenstnce+1);
-			lastIndex = endOfSenstnce +1;
-			endOfSenstnce = paragraphValue.indexOf(".", lastIndex + 1);
-			sentences.add(sentence);
+		Composite composite = new Composite(paragraph, paragraphValue);
+
+		String[] parts = paragraphValue.split(SPLITTER);
+
+		for (int i = 0; i < parts.length; i++){
+			String value = parts[i] + dot;
+			Component inner = getSuccessor().parse(value.trim());  
+			composite.add(inner);
 		}
-		
-		Composite composite = new Composite("Paragraph", paragraphValue);
-		for (String sentence : sentences){
-			Composite inner = getSuccessor().parse(sentence);  
-    		composite.add(inner);
-		}
-        return composite;
+		logger.info("# composite with paragraph was created #");
+		return composite;
 	}
 }
