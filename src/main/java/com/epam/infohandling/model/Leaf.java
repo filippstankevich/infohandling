@@ -40,4 +40,24 @@ public class Leaf implements Component {
         throw new Error("Logic error");
     }
 
+    public String getLexeme() {
+        return lexeme;
+    }
+
+    @Override
+    public void removeWithGivLen(int length) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void removeWithGivLetter(char ch) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void reversLexemes() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+
 }

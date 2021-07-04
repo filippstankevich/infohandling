@@ -10,5 +10,11 @@ public interface Component {
 
     void calculateExp();
 
+    void removeWithGivLen(int length);
+
+    void removeWithGivLetter(char ch);
+
+    void reversLexemes();
+
     void remove(Component component);
 }

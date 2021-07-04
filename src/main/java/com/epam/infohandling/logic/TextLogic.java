@@ -21,4 +21,22 @@ public class TextLogic {
         String textString = serealizedText.toString();
         return textString;
     }
+
+    public Composite removeWithGivLen(Composite text, int length) {
+        logger.info("removing text");
+        text.removeWithGivLen(length);
+        return text;
+    }
+
+    public Composite removeWithGivLetter(Composite text, char sh) {
+        logger.info("removing text");
+        text.removeWithGivLetter(sh);
+        return text;
+    }
+
+    public Composite reversLexemes(Composite text) {
+        text.reversLexemes();
+        return text;
+    }
+
 }
