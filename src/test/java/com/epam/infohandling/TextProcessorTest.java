@@ -20,15 +20,11 @@ public class TextProcessorTest {
         fis.read(data);
         fis.close();
         String expected = new String(data, "UTF-8");
-        //System.out.println("__________expected_____________");
-        //System.out.println(expected);
 
         TextProcessor textProcessor = new TextProcessor();
         Composite actualParse = textProcessor.parseText(expected);
         TextLogic textLogic = new TextLogic();
         String actual = textLogic.restore(actualParse);
-        //System.out.println("__________actual_____________");
-        //System.out.println(actual);
         Assert.assertEquals(expected, actual);
     }
 }

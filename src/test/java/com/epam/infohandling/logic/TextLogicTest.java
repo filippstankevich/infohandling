@@ -18,16 +18,12 @@ public class TextLogicTest {
         fis.read(data);
         fis.close();
         String expectedRestore = new String(data, "UTF-8");
-        System.out.println("__________expected_____________");
-        System.out.println(expectedRestore);
 
         TextProcessor textProcessor = new TextProcessor();
         Composite actualParse = textProcessor.parseText(expectedRestore);
         //actualParse.calculateExp();
         TextLogic textLogic = new TextLogic();
         String actualRestore = textLogic.restore(actualParse);
-        System.out.println("__________actual_____________");
-        System.out.println(actualRestore);
         Assert.assertEquals(expectedRestore, actualRestore);       
     }
     @Test
